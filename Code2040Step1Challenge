@@ -1,0 +1,6 @@
+import json, requests
+
+myToken = '0e3018b1bd9124c6d7d1ec6be992af0b'
+myGit= 'https://github.com/dre8597/Code2040'
+request = requests.post('http://challenge.code2040.org/api/register', json={'token':myToken,'github':myGit})
+print(request.text)

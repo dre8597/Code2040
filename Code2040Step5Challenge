@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Oct 31 15:40:13 2016
+
+@author: demondrelivingston
+"""
+
+
+import json, requests, datetime, dateutil.parser
+
+myToken='0e3018b1bd9124c6d7d1ec6be992af0b'
+request = requests.post('http://challenge.code2040.org/api/dating', json={'token':myToken})
+arry=json.loads(request.text)
+date=arry['datestamp']
+timeAdd=arry['interval']
+date= datetime.datetime.strptime(str(dateutil.parser.parse(date))[:-6],'%Y-%m-%d %H:%M:%S')
+newTime=date+datetime.timedelta(seconds=timeAdd)
+strTime=str(newTime)+'Z'
+strTime=strTime.replace(' ','T')
+request1=requests.post('http://challenge.code2040.org/api/dating/validate',json={'token':myToken, 'datestamp':strTime})
+print(request1.text)

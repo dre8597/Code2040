@@ -1,0 +1,10 @@
+import json, requests
+
+def reverseString(word):
+    return word[::-1] #just slice it
+
+myToken = '0e3018b1bd9124c6d7d1ec6be992af0b'
+request = requests.post('http://challenge.code2040.org/api/reverse',json={'token':myToken})
+reverse = reverseString(request.text)
+request1 = requests.post('http://challenge.code2040.org/api/reverse/validate',json={'token':myToken,'string':reverse})
+print(request1.text)
